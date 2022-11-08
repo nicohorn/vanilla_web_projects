@@ -1,0 +1,15 @@
+{
+  "name": "vanila_projects",
+  "version": "1.0.0",
+  "description": "Vanilla projects using only html, css and javascript",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server",
+    "start": "node server"
+  },
+  "author": "Nico Horn",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

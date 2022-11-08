@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap");
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Ubuntu", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      .bg {
+        background: url("https://images.unsplash.com/photo-1608611821879-e6a989ed75c4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80")
+          no-repeat center center/cover;
+        position: absolute;
+        top: -100px;
+        left: -100px;
+        width: calc(100vw + 200px);
+        height: calc(100vh + 200px);
+        z-index: -1;
+        filter: blur(0px);
+      }
+
+      .loading-text {
+        font-size: 50px;
+        color: #fff;
+      }
+    </style>
+    <title>Blurry loading</title>
+  </head>
+
+  <body>
+    <section class="bg"></section>
+    <div class="loading-text">0%</div>
+
+    <script>
+      const loadText = document.querySelector(".loading-text");
+      const bg = document.querySelector(".bg");
+
+      let load = 0;
+      let int = setInterval(blurring, 20);
+
+      function blurring() {
+        load++;
+
+        if (load > 99) {
+          clearInterval(int);
+        }
+
+        loadText.innerText = `${load}%`;
+        loadText.style.opacity = scale(load, 0, 100, 1, 0);
+        bg.style.filter = `blur(${scale(load, 0, 100, 30, 0)}px)`; //Esto es una expresión. Las comillas '`' indican una expresión
+
+        console.log(load);
+      }
+
+      const scale = (num, in_min, in_max, out_min, out_max) => {
+        return (
+          ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+        );
+      };
+    </script>
+  </body>
+</html>
